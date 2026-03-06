@@ -80,6 +80,8 @@
     .stagger.in > *:nth-child(3) { opacity:1; transform:none; transition-delay:.16s; }
     .stagger.in > *:nth-child(4) { opacity:1; transform:none; transition-delay:.24s; }
     .stagger.in > *:nth-child(5) { opacity:1; transform:none; transition-delay:.32s; }
+    @media (max-width:1024px) { .hero-grid { grid-template-columns:1fr !important; } }
+    @media (max-width:768px)  { .cta-grid  { grid-template-columns:1fr !important; } }
   </style>
 </head>
 <body>
@@ -124,21 +126,36 @@
     <div class="serif hidden lg:block" style="position:absolute;right:-2%;bottom:-10%;font-size:32vw;font-weight:700;color:rgba(28,48,85,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;">GH</div>
   </div>
 
-  <div style="max-width:1280px;margin:0 auto;width:100%;">
-    <p class="h1" style="font-size:0.68rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);margin-bottom:2rem;">
-      Washington, D.C. &nbsp;·&nbsp; Boutique Litigation
-    </p>
-    <h1 class="h2 serif" style="font-size:clamp(3rem,7.5vw,7.5rem);font-weight:400;line-height:1.0;letter-spacing:-0.03em;color:var(--navy);max-width:14ch;">
-      Small firm.<br><em>Big cases.</em>
-    </h1>
-    <div class="h3 rule-coral" style="margin:2.5rem 0;"></div>
-    <p class="h3" style="font-size:1.1rem;font-weight:400;line-height:1.75;color:var(--muted);max-width:52ch;">
-      Gerstein Harrow is a small litigation firm in Washington, D.C. We work on novel crypto consumer protection cases, civil rights matters, and complex appeals across the country.
-    </p>
-    <div class="h4" style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.75rem;">
-      <a href="#practice"  class="btn btn-coral">Our Work</a>
-      <a href="#contact"   class="btn btn-outline-navy">Get in Touch</a>
+  <div style="max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;" class="hero-grid">
+
+    <!-- Left: main content -->
+    <div>
+      <p class="h1" style="font-size:0.68rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);margin-bottom:2rem;">
+        Washington, D.C. &nbsp;·&nbsp; Boutique Litigation
+      </p>
+      <h1 class="h2 serif" style="font-size:clamp(3rem,7.5vw,7.5rem);font-weight:400;line-height:1.0;letter-spacing:-0.03em;color:var(--navy);">
+        Small firm.<br><em>Big cases.</em>
+      </h1>
+      <div class="h3 rule-coral" style="margin:2.5rem 0;"></div>
+      <p class="h3" style="font-size:1.1rem;font-weight:400;line-height:1.75;color:var(--muted);max-width:52ch;">
+        Gerstein Harrow is a small litigation firm in Washington, D.C. We work on novel crypto consumer protection cases, civil rights matters, and complex appeals across the country.
+      </p>
+      <div class="h4" style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.75rem;">
+        <a href="#practice"  class="btn btn-coral">Our Work</a>
+        <a href="#contact"   class="btn btn-outline-navy">Get in Touch</a>
+      </div>
     </div>
+
+    <!-- Right: hiring callout (desktop only) -->
+    <div class="h4 hidden lg:block" style="background:var(--navy);padding:3rem;">
+      <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.5rem;">Now Hiring</span>
+      <div class="serif" style="font-size:5.5rem;font-weight:400;color:#f0ece2;line-height:1;letter-spacing:-0.04em;margin-bottom:0.25rem;">3–5</div>
+      <div class="serif" style="font-size:1.4rem;font-weight:400;color:#f0ece2;letter-spacing:-0.02em;line-height:1.2;margin-bottom:1.75rem;">Associate<br>Positions</div>
+      <div style="height:1px;background:rgba(255,255,255,0.12);margin-bottom:1.75rem;"></div>
+      <p style="font-size:0.875rem;color:#a89e8e;line-height:1.75;margin-bottom:2rem;">Experienced civil litigators and recent clerks. D.C. office. Competitive pay, flexible schedule, and a non-toxic culture with a remarkably interesting docket.</p>
+      <a href="hiring.html" class="btn btn-coral" style="display:block;text-align:center;">See the Full Posting</a>
+    </div>
+
   </div>
 
   <div class="hidden lg:flex" aria-hidden="true" style="position:absolute;bottom:2.5rem;right:3.5rem;flex-direction:column;align-items:center;gap:0.75rem;">
@@ -233,7 +250,7 @@
 
 <!-- ── HIRING CTA BANNER ── -->
 <section style="background:var(--navy);padding:5rem 3rem;">
-  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal cta-grid">
     <div>
       <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Now Hiring</span>
       <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;color:#f0ece2;letter-spacing:-0.03em;line-height:1.15;margin-bottom:1.25rem;">
@@ -252,7 +269,7 @@
 
 <!-- ── CASES CTA ── -->
 <section style="background:var(--bg-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 3rem;">
-  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal cta-grid">
     <div>
       <span class="section-label">Recent Litigation</span>
       <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;color:var(--navy);letter-spacing:-0.03em;line-height:1.15;margin-bottom:1.25rem;">
@@ -289,7 +306,7 @@
   <div style="max-width:1280px;margin:0 auto;" class="reveal">
     <span class="section-label">Get in Touch</span>
     <h2 class="serif" style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;color:var(--navy);letter-spacing:-0.03em;line-height:1.1;margin-bottom:3rem;">
-      Contact <em>the Firm</em>
+      Contact the Firm
     </h2>
 
     <div style="display:flex;flex-wrap:wrap;gap:4rem;">

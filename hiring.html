@@ -46,6 +46,7 @@
     .h2 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.25s both; }
     .h3 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.4s  both; }
     .h4 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.55s both; }
+    @media (max-width:768px) { .hire-main-grid { grid-template-columns:1fr !important; } }
   </style>
 </head>
 <body>
@@ -94,7 +95,7 @@
 <!-- ── MAIN CONTENT ── -->
 <main style="max-width:1280px;margin:0 auto;padding:5rem 3rem;">
 
-  <div style="display:grid;grid-template-columns:2fr 1fr;gap:5rem;align-items:start;">
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:5rem;align-items:start;" class="hire-main-grid">
 
     <!-- Left: full posting -->
     <div>
@@ -147,7 +148,7 @@
     </div>
 
     <!-- Right: sidebar -->
-    <div style="position:sticky;top:6rem;">
+    <div style="position:sticky;top:6rem;align-self:start;">
 
       <div style="background:var(--navy);padding:2.5rem;margin-bottom:1.5px;">
         <h3 class="serif" style="font-size:1.2rem;font-weight:500;color:#f0ece2;margin-bottom:1.5rem;letter-spacing:-0.01em;">What We Offer</h3>
