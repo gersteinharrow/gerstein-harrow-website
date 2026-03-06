@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerstein Harrow LLP — Boutique Litigation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #f4ede0;
+      --bg-warm:  #ede5d4;
+      --bg-card:  #faf6ee;
+      --navy:     #1c3055;
+      --navy-lt:  #2a4571;
+      --coral:    #d94c1a;
+      --coral-dk: #b33d14;
+      --ink:      #1e1b16;
+      --muted:    #7a6e5e;
+      --border:   #ddd0ba;
+      --white:    #fdfaf4;
+    }
+    html { background: var(--bg); color: var(--ink); }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 400; line-height: 1.7; overflow-x: hidden; }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--coral); border-radius: 2px; }
+
+    /* Nav */
+    .nav-link { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.25s; position: relative; text-decoration: none; }
+    .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--coral); transition: width 0.3s; }
+    .nav-link:hover { color: var(--navy); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link-hiring { color: var(--coral) !important; font-weight: 600; }
+    .nav-link-hiring::after { background: var(--coral); }
+
+    /* Buttons */
+    .btn { display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 32px; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn:active { transform: translateY(0) !important; }
+    .btn:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+    .btn-coral { background: var(--coral); color: #fff; }
+    .btn-coral:hover { background: var(--coral-dk); transform: translateY(-2px); }
+    .btn-navy { background: var(--navy); color: #fff; }
+    .btn-navy:hover { background: var(--navy-lt); transform: translateY(-2px); }
+    .btn-outline-navy { border: 2px solid var(--navy); color: var(--navy); }
+    .btn-outline-navy:hover { background: var(--navy); color: #fff; transform: translateY(-2px); }
+    .btn-outline-white { border: 2px solid rgba(255,255,255,0.4); color: #fff; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-2px); }
+
+    /* Misc */
+    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 1.25rem; }
+    .rule-coral { height: 3px; width: 48px; background: var(--coral); }
+    .rule { height: 1px; background: var(--border); }
+
+    /* Practice cards */
+    .practice-card { background: var(--bg-card); border: 1px solid var(--border); transition: border-color 0.3s, box-shadow 0.3s; padding: 2.75rem; }
+    .practice-card:hover { border-color: var(--coral); box-shadow: 0 8px 32px rgba(217,76,26,0.08); }
+
+    /* Person cards */
+    .person-card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .person-card:hover { border-color: var(--navy); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28,48,85,0.1); }
+    .avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 1.5rem; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .h1 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.1s  both; }
+    .h2 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.25s both; }
+    .h3 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.4s  both; }
+    .h4 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.55s both; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.65s cubic-bezier(.16,1,.3,1), transform 0.65s cubic-bezier(.16,1,.3,1); }
+    .stagger.in > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+    .stagger.in > *:nth-child(2) { opacity:1; transform:none; transition-delay:.08s; }
+    .stagger.in > *:nth-child(3) { opacity:1; transform:none; transition-delay:.16s; }
+    .stagger.in > *:nth-child(4) { opacity:1; transform:none; transition-delay:.24s; }
+    .stagger.in > *:nth-child(5) { opacity:1; transform:none; transition-delay:.32s; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:50;padding:24px 0;transition:padding 0.4s,background 0.4s,box-shadow 0.4s;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 3rem;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" class="serif" style="font-size:1.1rem;font-weight:500;color:var(--navy);text-decoration:none;letter-spacing:-0.02em;">
+      Gerstein&nbsp;Harrow <span style="color:var(--coral);">LLP</span>
+    </a>
+    <nav class="hidden md:flex" style="gap:2.5rem;align-items:center;">
+      <a href="#practice" class="nav-link">Practice</a>
+      <a href="#people"   class="nav-link">People</a>
+      <a href="hiring.html" class="nav-link nav-link-hiring">We're Hiring</a>
+      <a href="cases.html" class="nav-link">Cases</a>
+      <a href="#contact"  class="nav-link">Contact</a>
+    </nav>
+    <button id="nav-toggle" class="md:hidden" style="background:none;border:none;cursor:pointer;color:var(--navy);padding:4px;" aria-label="Open menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="0" y1="2" x2="22" y2="2"/><line x1="0" y1="14" x2="22" y2="14"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" style="display:none;position:fixed;inset:0;z-index:49;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:3rem;">
+  <button id="nav-close" style="position:absolute;top:2rem;right:2.5rem;background:none;border:none;cursor:pointer;color:var(--muted);" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+  </button>
+  <a href="#practice"   class="serif mobile-link" style="font-size:2.5rem;font-weight:400;font-style:italic;color:var(--navy);text-decoration:none;">Practice</a>
+  <a href="#people"     class="serif mobile-link" style="font-size:2.5rem;font-weight:400;font-style:italic;color:var(--navy);text-decoration:none;">People</a>
+  <a href="hiring.html" class="serif mobile-link" style="font-size:2.5rem;font-weight:400;font-style:italic;color:var(--coral);text-decoration:none;">We're Hiring</a>
+  <a href="cases.html"  class="serif mobile-link" style="font-size:2.5rem;font-weight:400;font-style:italic;color:var(--navy);text-decoration:none;">Cases</a>
+  <a href="#contact"    class="serif mobile-link" style="font-size:2.5rem;font-weight:400;font-style:italic;color:var(--navy);text-decoration:none;">Contact</a>
+</div>
+
+
+<!-- ── HERO ── -->
+<section id="top" style="min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;">
+    <div style="position:absolute;top:-5%;right:-5%;width:55%;height:80%;background:radial-gradient(ellipse at 60% 30%,rgba(28,48,85,0.07) 0%,transparent 65%);"></div>
+    <div style="position:absolute;bottom:-10%;left:0;width:50%;height:60%;background:radial-gradient(ellipse at 30% 70%,rgba(217,76,26,0.06) 0%,transparent 65%);"></div>
+    <div class="serif hidden lg:block" style="position:absolute;right:-2%;bottom:-10%;font-size:32vw;font-weight:700;color:rgba(28,48,85,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;">GH</div>
+  </div>
+
+  <div style="max-width:1280px;margin:0 auto;width:100%;">
+    <p class="h1" style="font-size:0.68rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);margin-bottom:2rem;">
+      Washington, D.C. &nbsp;·&nbsp; Boutique Litigation
+    </p>
+    <h1 class="h2 serif" style="font-size:clamp(3rem,7.5vw,7.5rem);font-weight:400;line-height:1.0;letter-spacing:-0.03em;color:var(--navy);max-width:14ch;">
+      Small firm.<br><em>Big cases.</em>
+    </h1>
+    <div class="h3 rule-coral" style="margin:2.5rem 0;"></div>
+    <p class="h3" style="font-size:1.1rem;font-weight:400;line-height:1.75;color:var(--muted);max-width:52ch;">
+      Gerstein Harrow is a small litigation firm in Washington, D.C. We work on novel crypto consumer protection cases, civil rights matters, and complex appeals across the country.
+    </p>
+    <div class="h4" style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.75rem;">
+      <a href="#practice"  class="btn btn-coral">Our Work</a>
+      <a href="#contact"   class="btn btn-outline-navy">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hidden lg:flex" aria-hidden="true" style="position:absolute;bottom:2.5rem;right:3.5rem;flex-direction:column;align-items:center;gap:0.75rem;">
+    <span style="writing-mode:vertical-rl;font-size:0.6rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--border);">Scroll</span>
+    <div style="width:1px;height:44px;background:linear-gradient(to bottom,var(--coral),transparent);"></div>
+  </div>
+</section>
+
+
+<!-- ── PRACTICE AREAS ── -->
+<div style="background:var(--bg-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:1280px;margin:0 auto;padding:6rem 3rem;">
+    <div class="reveal" style="margin-bottom:4rem;">
+      <span class="section-label">What We Do</span>
+      <h2 class="serif" id="practice" style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;color:var(--navy);letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">
+        Practice Areas
+      </h2>
+      <p style="font-size:0.95rem;color:var(--muted);max-width:50ch;line-height:1.7;">
+        We focus on three areas — though they often overlap in interesting ways.
+      </p>
+    </div>
+
+    <div class="stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5px;background:var(--border);">
+      <div class="practice-card">
+        <div class="serif" style="font-size:3.5rem;font-weight:400;color:var(--coral);opacity:0.3;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.04em;">01</div>
+        <h3 class="serif" style="font-size:1.5rem;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.2;">Crypto Consumer<br>Protection</h3>
+        <div class="rule-coral" style="margin-bottom:1.25rem;"></div>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.75;">
+          We were among the first lawyers in the country to figure out how to hold crypto insiders accountable to their users. We've sued Compound, PoolTogether, Ooki, and others — developing legal theories that have gotten real traction in courts.
+        </p>
+      </div>
+      <div class="practice-card">
+        <div class="serif" style="font-size:3.5rem;font-weight:400;color:var(--coral);opacity:0.3;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.04em;">02</div>
+        <h3 class="serif" style="font-size:1.5rem;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.2;">Civil Rights &amp;<br>First Amendment</h3>
+        <div class="rule-coral" style="margin-bottom:1.25rem;"></div>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.75;">
+          We represent people whose civil rights have been violated. We have particular depth in cases involving public defenders whose independence has been threatened, and cases where corporations or the government are using legal process to punish speech.
+        </p>
+      </div>
+      <div class="practice-card">
+        <div class="serif" style="font-size:3.5rem;font-weight:400;color:var(--coral);opacity:0.3;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.04em;">03</div>
+        <h3 class="serif" style="font-size:1.5rem;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.2;">Complex Issues<br>&amp; Appeals</h3>
+        <div class="rule-coral" style="margin-bottom:1.25rem;"></div>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.75;">
+          We love hard questions. We brief and argue complex cases from district courts through the U.S. Supreme Court, covering labor, employment, consumer protection, constitutional, and election law — often on issues where there isn't a clear answer yet.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── PEOPLE ── -->
+<section id="people" style="padding:6rem 3rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="reveal" style="margin-bottom:4rem;">
+      <span class="section-label">The Team</span>
+      <h2 class="serif" style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;color:var(--navy);letter-spacing:-0.03em;line-height:1.1;">
+        Our People
+      </h2>
+    </div>
+
+    <div class="stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5px;background:var(--border);">
+      <div class="person-card">
+        <div class="avatar"><span class="serif" style="font-size:1.1rem;font-weight:500;color:#fff;">CG</span></div>
+        <h3 class="serif" style="font-size:1.35rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem;letter-spacing:-0.02em;">Charlie Gerstein</h3>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Partner</span>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;">An experienced civil rights lawyer who handles complex individual cases and class actions across the country. Charlie has been at the forefront of crypto accountability litigation and public defender independence cases.</p>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><span class="serif" style="font-size:1.1rem;font-weight:500;color:#fff;">JH</span></div>
+        <h3 class="serif" style="font-size:1.35rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem;letter-spacing:-0.02em;">Jason Harrow</h3>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Partner</span>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;">A constitutional lawyer, appellate advocate, and legal writer. Jason has briefed and argued more than a dozen appeals from trial courts through the U.S. Supreme Court in labor, employment, consumer protection, and election law.</p>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><span class="serif" style="font-size:1.1rem;font-weight:500;color:#fff;">JS</span></div>
+        <h3 class="serif" style="font-size:1.35rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem;letter-spacing:-0.02em;">Jeremy Shur</h3>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Associate</span>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;">A litigator working across the firm's crypto consumer protection, civil rights, and complex issues practice in federal and state courts.</p>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><span class="serif" style="font-size:1.1rem;font-weight:500;color:#fff;">SR</span></div>
+        <h3 class="serif" style="font-size:1.35rem;font-weight:500;color:var(--navy);margin-bottom:0.25rem;letter-spacing:-0.02em;">Sam Rosen</h3>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Associate</span>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;">Brings sharp analytical thinking to the firm's litigation practice, contributing to matters across all of our practice areas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── HIRING CTA BANNER ── -->
+<section style="background:var(--navy);padding:5rem 3rem;">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal">
+    <div>
+      <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Now Hiring</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;color:#f0ece2;letter-spacing:-0.03em;line-height:1.15;margin-bottom:1.25rem;">
+        We're looking for 3–5 associates<br>to join our D.C. office.
+      </h2>
+      <p style="font-size:0.95rem;color:#a89e8e;line-height:1.75;max-width:58ch;">
+        We're looking for experienced civil litigators and sharp recent clerks with excellent credentials and a genuine desire to sue the bad guys. We offer competitive pay, a flexible schedule, and a non-toxic culture with a remarkably interesting docket.
+      </p>
+    </div>
+    <div style="flex-shrink:0;">
+      <a href="hiring.html" class="btn btn-coral" style="white-space:nowrap;">See the Full Posting</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CASES CTA ── -->
+<section style="background:var(--bg-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 3rem;">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal">
+    <div>
+      <span class="section-label">Recent Litigation</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;color:var(--navy);letter-spacing:-0.03em;line-height:1.15;margin-bottom:1.25rem;">
+        What we're working on
+      </h2>
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:58ch;">
+        From crypto accountability to First Amendment parody to robocall litigation — a look at some of our current cases. Not a complete list, just a sample.
+      </p>
+    </div>
+    <div style="flex-shrink:0;">
+      <a href="cases.html" class="btn btn-outline-navy" style="white-space:nowrap;">See Current Cases</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PRESS ── -->
+<div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3.5rem 3rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p class="reveal" style="font-size:0.65rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2.5rem;">Coverage &amp; Mentions</p>
+    <div class="stagger" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3rem 4rem;">
+      <span class="serif" style="font-style:italic;font-size:1.15rem;color:var(--muted);opacity:0.4;transition:opacity 0.3s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='.4'">Reuters</span>
+      <span class="serif" style="font-style:italic;font-size:1.15rem;color:var(--muted);opacity:0.4;transition:opacity 0.3s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='.4'">The Wall Street Journal</span>
+      <span class="serif" style="font-style:italic;font-size:1.15rem;color:var(--muted);opacity:0.4;transition:opacity 0.3s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='.4'">The Washington Post</span>
+      <span class="serif" style="font-style:italic;font-size:1.15rem;color:var(--muted);opacity:0.4;transition:opacity 0.3s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='.4'">CoinDesk</span>
+      <span class="serif" style="font-style:italic;font-size:1.15rem;color:var(--muted);opacity:0.4;transition:opacity 0.3s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='.4'">Law360</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── CONTACT ── -->
+<section id="contact" style="padding:6rem 3rem;">
+  <div style="max-width:1280px;margin:0 auto;" class="reveal">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="serif" style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;color:var(--navy);letter-spacing:-0.03em;line-height:1.1;margin-bottom:3rem;">
+      Contact <em>the Firm</em>
+    </h2>
+
+    <div style="display:flex;flex-wrap:wrap;gap:4rem;">
+      <div>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Email</span>
+        <a href="mailto:hi@gerstein-harrow.com" style="font-size:1.15rem;font-family:'Playfair Display',Georgia,serif;color:var(--navy);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--navy)'">hi@gerstein-harrow.com</a>
+      </div>
+      <div>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Phone</span>
+        <a href="tel:+12026704809" style="font-size:1.15rem;font-family:'Playfair Display',Georgia,serif;color:var(--navy);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--navy)'">202-670-4809</a>
+      </div>
+      <div>
+        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Address</span>
+        <address style="font-style:normal;font-size:0.95rem;color:var(--ink);line-height:1.6;">
+          1629 Columbia Rd. NW, Suite 302<br>Washington, DC 20009
+        </address>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer style="border-top:2px solid var(--border);padding:2rem 3rem;background:var(--bg-warm);">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+    <span class="serif" style="font-size:1rem;font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Gerstein Harrow <span style="color:var(--coral);">LLP</span></span>
+    <span style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">&copy; 2025 Gerstein Harrow LLP &nbsp;·&nbsp; Washington, D.C.</span>
+    <div style="display:flex;gap:2rem;">
+      <a href="mailto:hi@gerstein-harrow.com" style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--muted)'">Email</a>
+      <a href="tel:+12026704809"              style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--muted)'">Phone</a>
+      <a href="hiring.html"                   style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral-dk)'" onmouseout="this.style.color='var(--coral)'">We're Hiring</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.padding = '12px 0';
+      nav.style.background = 'rgba(244,237,224,0.95)';
+      nav.style.backdropFilter = 'blur(12px)';
+      nav.style.webkitBackdropFilter = 'blur(12px)';
+      nav.style.boxShadow = '0 1px 0 rgba(0,0,0,0.08)';
+    } else {
+      nav.style.padding = '24px 0';
+      nav.style.background = 'transparent';
+      nav.style.backdropFilter = 'none';
+      nav.style.webkitBackdropFilter = 'none';
+      nav.style.boxShadow = 'none';
+    }
+  }, { passive: true });
+  document.getElementById('nav-toggle').addEventListener('click', () => { document.getElementById('mobile-menu').style.display = 'flex'; });
+  document.getElementById('nav-close').addEventListener('click',  () => { document.getElementById('mobile-menu').style.display = 'none'; });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => { document.getElementById('mobile-menu').style.display = 'none'; }));
+  const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }); }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .stagger').forEach(el => io.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
