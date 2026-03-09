@@ -7,25 +7,42 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:       #f0ece0;
-      --bg-warm:  #e6e1cf;
-      --bg-card:  #f5f1e6;
-      --navy:     #1c3326;
-      --navy-lt:  #2a4d38;
-      --coral:    #a07228;
-      --coral-dk: #7d5618;
-      --ink:      #181e15;
-      --muted:    #4e5848;
-      --border:   #cac5b0;
-      --white:    #f7f3e8;
+      --bg:       #f8f7f5;
+      --bg-warm:  #f0eeea;
+      --bg-card:  #ffffff;
+      --navy:     #111110;
+      --navy-lt:  #2e2e2c;
+      --coral:    #b09040;
+      --coral-dk: #8a6e2a;
+      --ink:      #0d0d0c;
+      --muted:    #68685f;
+      --border:   #e2e0da;
+      --white:    #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:       #0e0e0d;
+        --bg-warm:  #141412;
+        --bg-card:  #1c1c1a;
+        --navy:     #edebe6;
+        --navy-lt:  #c0bdb6;
+        --ink:      #f0ede8;
+        --muted:    #8a8780;
+        --border:   #282624;
+        --white:    #0e0e0d;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      img[alt="Gerstein Harrow LLP"] { filter: invert(1); }
+      img[alt="GH"] { filter: invert(1) opacity(0.25); }
     }
     html { background: var(--bg); color: var(--ink); }
-    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 400; line-height: 1.7; overflow-x: hidden; }
-    .serif { font-family: 'Playfair Display', Georgia, serif; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; font-weight: 400; line-height: 1.7; overflow-x: hidden; }
+    .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -40,7 +57,7 @@
     .nav-link-hiring::after { background: var(--coral); }
 
     /* Buttons */
-    .btn { display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 32px; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 32px; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
     .btn:active { transform: translateY(0) !important; }
     .btn:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
     .btn-coral { background: var(--coral); color: #fff; }
@@ -59,11 +76,11 @@
 
     /* Practice cards */
     .practice-card { background: var(--bg-card); border: 1px solid var(--border); transition: border-color 0.3s, box-shadow 0.3s; padding: 2.75rem; }
-    .practice-card:hover { border-color: var(--coral); box-shadow: 0 8px 32px rgba(217,76,26,0.08); }
+    .practice-card:hover { border-color: var(--coral); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
 
     /* Person cards */
     .person-card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
-    .person-card:hover { border-color: var(--navy); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28,48,85,0.1); }
+    .person-card:hover { border-color: var(--navy); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
     .avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 1.5rem; }
 
     /* Animations */
@@ -122,9 +139,9 @@
 <!-- ── HERO ── -->
 <section id="top" style="min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden;">
   <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;">
-    <div style="position:absolute;top:-5%;right:-5%;width:55%;height:80%;background:radial-gradient(ellipse at 60% 30%,rgba(28,51,38,0.07) 0%,transparent 65%);"></div>
-    <div style="position:absolute;bottom:-10%;left:0;width:50%;height:60%;background:radial-gradient(ellipse at 30% 70%,rgba(160,114,40,0.06) 0%,transparent 65%);"></div>
-    <div class="serif hidden lg:block" style="position:absolute;right:-2%;bottom:-10%;font-size:32vw;font-weight:700;color:rgba(28,51,38,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;">GH</div>
+    <div style="position:absolute;top:-5%;right:-5%;width:55%;height:80%;background:radial-gradient(ellipse at 60% 30%,rgba(176,144,64,0.07) 0%,transparent 65%);"></div>
+    <div style="position:absolute;bottom:-10%;left:0;width:50%;height:60%;background:radial-gradient(ellipse at 30% 70%,rgba(176,144,64,0.05) 0%,transparent 65%);"></div>
+    <div class="serif hidden lg:block" style="position:absolute;right:-2%;bottom:-10%;font-size:32vw;font-weight:700;color:rgba(0,0,0,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;">GH</div>
   </div>
 
   <div style="max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;" class="hero-grid">
@@ -250,14 +267,14 @@
 
 
 <!-- ── HIRING CTA BANNER ── -->
-<section style="background:var(--navy);padding:5rem 3rem;">
+<section style="background:#111110;padding:5rem 3rem;">
   <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;" class="reveal cta-grid">
     <div>
       <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:1.25rem;">Now Hiring</span>
-      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;color:#f0ece2;letter-spacing:-0.03em;line-height:1.15;margin-bottom:1.25rem;">
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;color:#f0ede8;letter-spacing:-0.03em;line-height:1.15;margin-bottom:1.25rem;">
         We&#x2019;re looking for 3–5 associates<br>to join our D.C. office.
       </h2>
-      <p style="font-size:0.95rem;color:#a89e8e;line-height:1.75;max-width:58ch;">
+      <p style="font-size:0.95rem;color:#908882;line-height:1.75;max-width:58ch;">
         We&#x2019;re looking for experienced civil litigators and sharp recent clerks with excellent credentials and a genuine desire to sue the bad guys. We offer competitive pay, a flexible schedule, and a non-toxic culture with a remarkably interesting docket.
       </p>
     </div>
@@ -313,11 +330,11 @@
     <div style="display:flex;flex-wrap:wrap;gap:4rem;">
       <div>
         <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Email</span>
-        <a href="mailto:hi@gerstein-harrow.com" style="font-size:1.15rem;font-family:'Playfair Display',Georgia,serif;color:var(--navy);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--navy)'">hi@gerstein-harrow.com</a>
+        <a href="mailto:hi@gerstein-harrow.com" style="font-size:1.15rem;font-family:'Cormorant Garamond',Georgia,serif;color:var(--navy);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--navy)'">hi@gerstein-harrow.com</a>
       </div>
       <div>
         <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Phone</span>
-        <a href="tel:+12026704809" style="font-size:1.15rem;font-family:'Playfair Display',Georgia,serif;color:var(--navy);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--navy)'">202-670-4809</a>
+        <a href="tel:+12026704809" style="font-size:1.15rem;font-family:'Cormorant Garamond',Georgia,serif;color:var(--navy);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--navy)'">202-670-4809</a>
       </div>
       <div>
         <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Address</span>
@@ -348,7 +365,7 @@
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
       nav.style.padding = '12px 0';
-      nav.style.background = 'rgba(244,237,224,0.95)';
+      nav.style.background = 'rgba(248,247,245,0.95)';
       nav.style.backdropFilter = 'blur(12px)';
       nav.style.webkitBackdropFilter = 'blur(12px)';
       nav.style.boxShadow = '0 1px 0 rgba(0,0,0,0.08)';
