@@ -108,6 +108,10 @@
     .stagger.in > *:nth-child(5) { opacity:1; transform:none; transition-delay:.32s; }
     @media (max-width:1024px) { .hero-grid { grid-template-columns:1fr !important; } }
     @media (max-width:768px)  { .cta-grid  { grid-template-columns:1fr !important; } }
+    /* Hero: on mobile use natural flow so content never hides behind the fixed nav */
+    @media (max-width:1023px) {
+      #top { justify-content:flex-start !important; min-height:auto !important; padding-left:1.5rem !important; padding-right:1.5rem !important; }
+    }
   </style>
 </head>
 <body>
@@ -146,7 +150,7 @@
 
 
 <!-- ── HERO ── -->
-<section id="top" style="min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden;">
+<section id="top" style="min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 3rem 5rem;position:relative;overflow:hidden;">
   <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;">
     <div style="position:absolute;top:-5%;right:-5%;width:55%;height:80%;background:radial-gradient(ellipse at 60% 30%,rgba(176,144,64,0.07) 0%,transparent 65%);"></div>
     <div style="position:absolute;bottom:-10%;left:0;width:50%;height:60%;background:radial-gradient(ellipse at 30% 70%,rgba(176,144,64,0.05) 0%,transparent 65%);"></div>
