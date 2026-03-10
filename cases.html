@@ -55,7 +55,7 @@
     .nav-link:hover::after { width: 100%; }
     .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 1.25rem; }
     .tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral); border: 1.5px solid currentColor; padding: 3px 9px; }
-    .case-row { border-bottom: 1px solid var(--border); padding: 2.5rem 0 2.5rem 1.25rem; border-left: 3px solid transparent; transition: border-left-color 0.25s; }
+    .case-row { border-bottom: 1px solid var(--border); border-left: 3px solid transparent; transition: border-left-color 0.25s; }
     .case-row:last-child { border-bottom: none; }
     .case-row:hover { border-left-color: var(--coral); }
     .case-row:hover .case-title { color: var(--coral); }
@@ -67,6 +67,74 @@
     .h1 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.1s  both; }
     .h2 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.25s both; }
     .h3 { animation: fadeUp 0.85s cubic-bezier(.16,1,.3,1) 0.4s  both; }
+
+    /* ── Accordion ── */
+    .section-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: 0.85rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .section-toggle:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+    .section-toggle-inner { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    .section-count {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+    .toggle-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+      color: var(--muted);
+    }
+    .section-toggle[aria-expanded="true"] .toggle-icon { transform: rotate(45deg); }
+    .section-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.55s cubic-bezier(.16,1,.3,1);
+    }
+    .section-body.open { max-height: 99999px; }
+
+    .case-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: 2.5rem 0 0.75rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .case-toggle:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+    .case-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      margin-top: 8px;
+      transition: transform 0.25s cubic-bezier(.16,1,.3,1);
+      color: var(--muted);
+    }
+    .case-row.open .case-icon { transform: rotate(45deg); }
+    .case-detail {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(.16,1,.3,1);
+      padding-left: 1.25rem;
+    }
+    .case-row.open .case-detail { max-height: 2000px; }
   </style>
 </head>
 <body>
@@ -84,7 +152,7 @@
       <a href="cases.html"  class="nav-link" style="color:var(--navy);font-weight:600;">Cases</a>
       <a href="index.html#contact"   class="nav-link">Contact</a>
     </nav>
-    <a href="index.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;" class="md:hidden" onmouseover="this.style.color='var(--navy)'" onmouseout="this.style.color='var(--muted)'">← Home</a>
+    <a href="index.html" style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;" class="md:hidden" onmouseover="this.style.color='var(--navy)'" onmouseout="this.style.color='var(--muted)'">&#x2190; Home</a>
   </div>
 </header>
 
@@ -97,7 +165,7 @@
       What We&#x2019;re<br><em>Working On</em>
     </h1>
     <p class="h3" style="font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:54ch;">
-      High-stakes, first-impression litigation in crypto accountability, civil rights, and complex appeals. A representative sample — not a complete picture.
+      High-stakes, first-impression litigation in crypto accountability, civil rights, and complex appeals. A representative sample &#x2014; not a complete picture.
     </p>
   </div>
 </section>
@@ -107,227 +175,347 @@
 <main style="max-width:1280px;margin:0 auto;padding:3rem 3rem 5rem;">
 
   <!-- ① Plaintiff-Side Crypto Litigation -->
-  <div style="margin-bottom:4.5rem;">
-    <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
-      Plaintiff-Side Crypto Litigation
-    </h2>
-    <div style="padding:1.75rem 0 0.25rem 1.25rem;margin-bottom:0.5rem;">
-      <p style="font-size:0.975rem;font-weight:500;color:var(--ink);line-height:1.85;max-width:72ch;margin-bottom:0.75rem;">The crypto industry promised decentralization. Too often it delivered fraud, hacks, and billions in losses — with little accountability. We are changing that.</p>
-      <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">We filed the first lawsuits in the country to hold DAOs and their venture capital backers liable for the losses they cause. In each case, we argued that so-called &#x201C;decentralized&#x201D; organizations are really just general partnerships — and that everyone involved in their governance shares liability.</p>
-    </div>
+  <div style="margin-bottom:2rem;">
+    <button class="section-toggle" aria-expanded="false" aria-controls="section-crypto">
+      <div class="section-toggle-inner">
+        <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
+          Plaintiff-Side Crypto Litigation
+        </h2>
+        <span class="section-count">4 cases</span>
+      </div>
+      <svg class="toggle-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="9" y1="2" x2="9" y2="16"/><line x1="2" y1="9" x2="16" y2="9"/>
+      </svg>
+    </button>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Houghton v. Compound DAO</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.D. Cal. &#xB7; 2022</span>
-        <span class="tag">Class Action &#xB7; Securities</span>
+    <div class="section-body" id="section-crypto">
+      <div style="padding:1.75rem 0 0.25rem 1.25rem;margin-bottom:0.5rem;">
+        <p style="font-size:0.975rem;font-weight:500;color:var(--ink);line-height:1.85;max-width:72ch;margin-bottom:0.75rem;">The crypto industry promised decentralization. Too often it delivered fraud, hacks, and billions in losses &#x2014; with little accountability. We are changing that.</p>
+        <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">We filed the first lawsuits in the country to hold DAOs and their venture capital backers liable for the losses they cause. In each case, we argued that so-called &#x201C;decentralized&#x201D; organizations are really just general partnerships &#x2014; and that everyone who runs their businesses shares liability.</p>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">Compound DAO was one of the largest decentralized finance protocols in the world, with hundreds of millions in user deposits. Its venture backers — including Andreessen Horowitz and Paradigm — collected enormous profits while claiming no responsibility for how the protocol operated. We sued the DAO, its founders, and its investors under federal securities laws, arguing that whatever label you put on it, COMP tokens were unregistered securities and everyone who helped sell them shares liability. The court denied the motion to dismiss.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20Comp.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
-        <a href="Cases/Doc.%2094%20Order%20Denying%20MTD.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Order Denying MTD
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Sarcuni v. bZx DAO</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">S.D. Cal. &#xB7; 2022</span>
-        <span class="tag">Class Action &#xB7; DAO Liability</span>
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Houghton v. Compound DAO</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.D. Cal. &#xB7; 2022</span>
+            <span class="tag">Class Action &#xB7; Securities</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">Compound DAO was one of the largest decentralized finance protocols in the world, with hundreds of millions in user deposits. Its venture backers &#x2014; including Andreessen Horowitz and Paradigm &#x2014; collected enormous profits while claiming no responsibility for how the protocol operated. We sued the DAO, its founders, and its investors under federal securities laws, arguing that whatever label you put on it, COMP tokens were unregistered securities and everyone who helped sell them shares liability. The court denied the motion to dismiss.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20Comp.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+            <a href="Cases/Doc.%2094%20Order%20Denying%20MTD.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Order Denying MTD
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">The bZx protocol&#x2019;s founders told users their funds were secured against hacks — then allowed hackers to drain tens of millions in user assets through a series of attacks. When the dust settled, the founders renamed the DAO &#x201C;Ooki&#x201D; and tried to dissolve responsibility behind a new name. We sued them anyway. The case was among the first to hold that DAO participants can&#x2019;t escape liability just by calling themselves decentralized — a theory courts ultimately validated.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20Sarcuni.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Samuels v. Lido DAO</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.D. Cal. &#xB7; 2023</span>
-        <span class="tag">Class Action &#xB7; Securities</span>
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Sarcuni v. bZx DAO</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">S.D. Cal. &#xB7; 2022</span>
+            <span class="tag">Class Action &#xB7; DAO Liability</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">The bZx protocol&#x2019;s founders told users their funds were secured against hacks &#x2014; then allowed hackers to drain tens of millions in user assets through a series of attacks. When the dust settled, the founders renamed the DAO &#x201C;Ooki&#x201D; and tried to dissolve responsibility behind a new name. We sued them anyway. The case was among the first to hold that DAO participants can&#x2019;t escape liability just by calling themselves decentralized &#x2014; a theory courts ultimately validated.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20Sarcuni.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">Lido DAO runs one of the largest Ethereum staking services in the world, with tens of billions in user assets under management. It issued LDO tokens, which we argue are unregistered securities. The case raises genuinely hard questions: Can an entity that calls itself a DAO be sued at all? Who are its partners? When does a governance token cross the line into a security? The court called these &#x201C;new and important questions&#x201D; and let the case proceed.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20Lido.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
-        <a href="Cases/Doc.%20116%20MTD%20Op.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          MTD Opinion
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row" style="border-bottom:none;">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Celacare Technologies v. Circle Internet Financial</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D. Mass. &#xB7; 2024</span>
-        <span class="tag">UCC &#xB7; Stablecoins</span>
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Samuels v. Lido DAO</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.D. Cal. &#xB7; 2023</span>
+            <span class="tag">Class Action &#xB7; Securities</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">Lido DAO runs one of the largest Ethereum staking services in the world, with tens of billions in user assets under management. It issued LDO tokens, which we argue are unregistered securities. The case raises genuinely hard questions: Can an entity that calls itself a DAO be sued at all? Who are its partners? When does a governance token cross the line into a security? The court called these &#x201C;new and important questions&#x201D; and let the case proceed.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20Lido.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+            <a href="Cases/Doc.%20116%20MTD%20Op.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              MTD Opinion
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">When a Texas company lost $1 million in USDC after a single-character typo sent the coins to an Ethereum address no one can reach, Circle — the company that issues USDC — told them to take the loss. We&#x2019;re arguing that USDC is Circle&#x2019;s promise to pay the bearer on demand, and that USDC are &#x201C;financial assets&#x201D; under UCC Article 8, which would require Circle to honor or reissue the coins. The question matters to everyone who uses stablecoins.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20Celacare.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
+
+      <div class="case-row" style="border-bottom:none;">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Celacare Technologies v. Circle Internet Financial</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D. Mass. &#xB7; 2024</span>
+            <span class="tag">UCC &#xB7; Stablecoins</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">When a Texas company lost $1 million in USDC after a single-character typo sent the coins to an Ethereum address no one can reach, Circle &#x2014; the company that issues USDC &#x2014; told them to take the loss. We&#x2019;re arguing that USDC is Circle&#x2019;s promise to pay the bearer on demand, and that USDC are &#x201C;financial assets&#x201D; under UCC Article 8, which would require Circle to honor or reissue the coins. The question matters to everyone who uses stablecoins.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20Celacare.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </div><!-- /section-body -->
   </div>
 
   <!-- ② Novel Asset Recovery for Victims of Terror -->
-  <div style="margin-bottom:4.5rem;">
-    <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
-      Novel Asset Recovery for Victims of Terror
-    </h2>
-    <div style="padding:1.75rem 0 0.25rem 1.25rem;margin-bottom:0.5rem;">
-      <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">North Korea funds its weapons programs through an aggressive campaign of cyberattacks, including hacks of crypto exchanges. We represent the family of a missionary who was kidnapped, tortured, and murdered by North Korea, and we are using novel legal theories to pursue North Korean crypto assets possessed by American companies.</p>
-    </div>
+  <div style="margin-bottom:2rem;">
+    <button class="section-toggle" aria-expanded="false" aria-controls="section-terror">
+      <div class="section-toggle-inner">
+        <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
+          Novel Asset Recovery for Victims of Terror
+        </h2>
+        <span class="section-count">3 cases</span>
+      </div>
+      <svg class="toggle-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="9" y1="2" x2="9" y2="16"/><line x1="2" y1="9" x2="16" y2="9"/>
+      </svg>
+    </button>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Kim v. Democratic People&#x2019;s Republic of Korea</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">S.D.N.Y. &#xB7; 2025</span>
-        <span class="tag">Judgment Enforcement &#xB7; Crypto Garnishment</span>
+    <div class="section-body" id="section-terror">
+      <div style="padding:1.75rem 0 0.25rem 1.25rem;margin-bottom:0.5rem;">
+        <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">North Korea funds its weapons programs through an aggressive campaign of cyberattacks, including hacks of crypto exchanges. We represent the family of a missionary who was kidnapped, tortured, and murdered by North Korea, and we are using novel legal theories to pursue North Korean crypto assets possessed by American companies.</p>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">After winning a $330 million federal court judgment against North Korea for the murder of their family member, the Kim family weren&#x2019;t done. Investigators traced USDC held by Circle Internet Financial to North Korean hackers, and we moved to garnish those funds. The case requires courts to grapple with a genuinely new question: when North Korean state hackers launder stolen crypto through an American company, can American courts force the company to hand it over?</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%204%20Circle%20Turnover%20Memo%20of%20Law.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Turnover Brief
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Kim v. United States (USDT Forfeiture)</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D.D.C. &#xB7; 2025&#x2013;26</span>
-        <span class="tag">Asset Forfeiture &#xB7; Victims&#x2019; Rights</span>
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Kim v. Democratic People&#x2019;s Republic of Korea</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">S.D.N.Y. &#xB7; 2025</span>
+            <span class="tag">Judgment Enforcement &#xB7; Crypto Garnishment</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">After winning a $330 million federal court judgment against North Korea for the murder of their family member, the Kim family weren&#x2019;t done. Investigators traced USDC held by Circle Internet Financial to North Korean hackers, and we moved to garnish those funds. The case requires courts to grapple with a genuinely new question: when North Korean state hackers launder stolen crypto through an American company, can American courts force the company to hand it over?</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%204%20Circle%20Turnover%20Memo%20of%20Law.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Turnover Brief
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">When the U.S. government seized approximately $14 million in USDT linked to North Korea, we intervened in the forfeiture proceeding on behalf of the Kim family — who hold federal court judgments against North Korea for the kidnapping and murder of their father. The government took the position it could keep the money. We disagree. The terror victims — not the U.S. Treasury — are entitled to those assets.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%208%20Han%20Kim%20Claim%20.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Claimant&#x2019;s Claim
-        </a>
-        <a href="Cases/Doc.%2023%20Motion%20for%20Judgment%20on%20The%20Pleadings.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Motion for Judgment
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row" style="border-bottom:none;">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Kim v. Railgun DAO</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D.D.C. &#xB7; 2026</span>
-        <span class="tag">Anti-Terrorism Act &#xB7; DAO Liability</span>
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Kim v. United States (USDT Forfeiture)</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D.D.C. &#xB7; 2025&#x2013;26</span>
+            <span class="tag">Asset Forfeiture &#xB7; Victims&#x2019; Rights</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">When the U.S. government seized approximately $14 million in USDT linked to North Korea, we intervened in the forfeiture proceeding on behalf of the Kim family &#x2014; who hold federal court judgments against North Korea for the kidnapping and murder of their father. The government took the position it could keep the money. We disagree. The terror victims &#x2014; not the U.S. Treasury &#x2014; are entitled to those assets.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%208%20Han%20Kim%20Claim%20.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Claimant&#x2019;s Claim
+            </a>
+            <a href="Cases/Doc.%2023%20Motion%20for%20Judgment%20on%20The%20Pleadings.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Motion for Judgment
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">Railgun is a cryptocurrency mixer — software designed to make it nearly impossible to trace where money comes from or goes. North Korea and Hezbollah used Railgun to launder hundreds of millions in stolen and terror-linked crypto. We sued Railgun DAO on behalf of the Kim family and survivors of Hezbollah&#x2019;s 2006 rocket campaign in northern Israel, arguing that a DAO built to enable anonymous transactions can be held liable under the Anti-Terrorism Act for the terrorism it enables.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20Railgun.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
+
+      <div class="case-row" style="border-bottom:none;">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Kim v. Railgun DAO</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D.D.C. &#xB7; 2026</span>
+            <span class="tag">Anti-Terrorism Act &#xB7; DAO Liability</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">Railgun is a cryptocurrency mixer &#x2014; software designed to make it nearly impossible to trace where money comes from or goes. North Korea and Hezbollah used Railgun to launder hundreds of millions in stolen and terror-linked crypto. We sued Railgun DAO on behalf of the Kim family and survivors of Hezbollah&#x2019;s 2006 rocket campaign in northern Israel, arguing that a DAO built to enable anonymous transactions can be held liable under the Anti-Terrorism Act for the terrorism it enables.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20Railgun.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </div><!-- /section-body -->
   </div>
 
   <!-- ③ Civil Rights -->
-  <div style="margin-bottom:4.5rem;">
-    <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
-      Civil Rights
-    </h2>
-    <div style="padding:1.75rem 0 0.25rem 1.25rem;margin-bottom:0.5rem;">
-      <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:0.85rem;">We represent people whose civil rights have been violated, with particular depth in cases involving public defenders whose independence has been jeopardized.</p>
-      <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">Our attorneys have special expertise representing public defenders whose right to practice independently has been threatened. When a prosecutor or judge retaliates against a defender for doing their job — filing motions, advocating for their clients, exercising their right to trial — it doesn&#x2019;t just harm one lawyer. It sends a message to every defender in that courthouse that vigorous advocacy comes with a price. We take those cases and have handled more than a dozen so far.</p>
-    </div>
+  <div style="margin-bottom:2rem;">
+    <button class="section-toggle" aria-expanded="false" aria-controls="section-civilrights">
+      <div class="section-toggle-inner">
+        <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
+          Civil Rights
+        </h2>
+        <span class="section-count">2 cases</span>
+      </div>
+      <svg class="toggle-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="9" y1="2" x2="9" y2="16"/><line x1="2" y1="9" x2="16" y2="9"/>
+      </svg>
+    </button>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Doe v. New Mexico Law Offices of the Public Defender</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.M. 1st Dist. &amp; Ct. App. &#xB7; 2024&#x2013;25</span>
-        <span class="tag">Right to Counsel</span>
+    <div class="section-body" id="section-civilrights">
+      <div style="padding:1.75rem 0 0.25rem 1.25rem;margin-bottom:0.5rem;">
+        <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:0.85rem;">We represent people whose civil rights have been violated, with particular depth in cases involving public defenders whose independence has been jeopardized.</p>
+        <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">Our attorneys have special expertise representing public defenders whose right to practice independently has been threatened. When a prosecutor or judge retaliates against a defender for doing their job &#x2014; filing motions, advocating for their clients, exercising their right to trial &#x2014; it doesn&#x2019;t just harm one lawyer. It sends a message to every defender in that courthouse that vigorous advocacy comes with a price. We take those cases and have handled more than a dozen so far.</p>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">In 2011, John Doe was arrested as a minor in New Mexico for a crime that — by law — carried a sentence that had to end before his 21st birthday. His public defender let him plead guilty to that sentence without flagging the legal limit, and never sought his release when his birthday passed. A second attorney, appointed specifically to fix the error, missed it too. Doe spent more than ten years in prison past his lawful release date. We sued the New Mexico public defender system for violating his constitutional right to counsel, and are now before the Court of Appeals arguing that institutional failures in oversight and training give rise to civil liability.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/1%20Complaint.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
-        <a href="Cases/16%20Doe%20Brief%20in%20Chief.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Appellate Brief
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row" style="border-bottom:none;">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Proton Associates v. Avelo Airlines</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D. Nev. &#xB7; 2025</span>
-        <span class="tag">First Amendment &#xB7; Parody</span>
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Doe v. New Mexico Law Offices of the Public Defender</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.M. 1st Dist. &amp; Ct. App. &#xB7; 2024&#x2013;25</span>
+            <span class="tag">Right to Counsel</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">In 2011, John Doe was arrested as a minor in New Mexico for a crime that &#x2014; by law &#x2014; carried a sentence that had to end before his 21st birthday. His public defender let him plead guilty to that sentence without flagging the legal limit, and never sought his release when his birthday passed. A second attorney, appointed specifically to fix the error, missed it too. Doe spent more than ten years in prison past his lawful release date. We sued the New Mexico public defender system for violating his constitutional right to counsel, and are now before the Court of Appeals arguing that institutional failures in oversight and training give rise to civil liability.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/1%20Complaint.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+            <a href="Cases/16%20Doe%20Brief%20in%20Chief.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Appellate Brief
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">In 2025, Avelo Airlines signed a contract with ICE to fly deportation flights. Our client responded by renting two billboards reading &#x201C;AvelNO&#x201D; — a parody of Avelo&#x2019;s name, with a red &#x201C;N&#x201D; inserted in the middle. Rather than answer the protest, Avelo filed a trademark lawsuit. We&#x2019;re defending the case as precisely the kind of political speech the First Amendment was designed to protect.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20and%20Exhibits%201.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
+
+      <div class="case-row" style="border-bottom:none;">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Proton Associates v. Avelo Airlines</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">D. Nev. &#xB7; 2025</span>
+            <span class="tag">First Amendment &#xB7; Parody</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">In 2025, Avelo Airlines signed a contract with ICE to fly deportation flights. Our client responded by renting two billboards reading &#x201C;AvelNO&#x201D; &#x2014; a parody of Avelo&#x2019;s name, with a red &#x201C;N&#x201D; inserted in the middle. Rather than answer the protest, Avelo filed a trademark lawsuit. We&#x2019;re defending the case as precisely the kind of political speech the First Amendment was designed to protect.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20and%20Exhibits%201.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </div><!-- /section-body -->
   </div>
 
   <!-- ④ Complex Issues & Appeals -->
-  <div style="margin-bottom:4.5rem;">
-    <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
-      Complex Issues &amp; Appeals
-    </h2>
+  <div style="margin-bottom:2rem;">
+    <button class="section-toggle" aria-expanded="false" aria-controls="section-complex">
+      <div class="section-toggle-inner">
+        <h2 class="serif" style="font-size:1rem;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;padding-bottom:0.75rem;border-bottom:2px solid var(--navy);display:inline-block;">
+          Complex Issues &amp; Appeals
+        </h2>
+        <span class="section-count">2 cases</span>
+      </div>
+      <svg class="toggle-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="9" y1="2" x2="9" y2="16"/><line x1="2" y1="9" x2="16" y2="9"/>
+      </svg>
+    </button>
 
-    <div class="case-row">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Javed v. Experis US, Inc. &amp; IBM</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">Cal. Ct. App. &#xB7; 2022&#x2013;23</span>
-        <span class="tag">PAGA &#xB7; Labor &#xB7; Appeal</span>
+    <div class="section-body" id="section-complex">
+      <div class="case-row">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Javed v. Experis US, Inc. &amp; IBM</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">Cal. Ct. App. &#xB7; 2022&#x2013;23</span>
+            <span class="tag">PAGA &#xB7; Labor &#xB7; Appeal</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">A PAGA representative action on behalf of thousands of California workers allegedly misclassified as independent contractors by Experis, a major staffing firm, and IBM. The case raised layered questions about PAGA standing, joint employer liability, and what it means to &#x201C;employ&#x201D; someone when a staffing agency and an end-user client share control of a worker. We briefed and argued the appeal in the California First Appellate District, which issued its opinion in July 2023.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Appellant%20Opening%20Brief%20As%20Filed%20v2.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Opening Brief
+            </a>
+            <a href="Cases/Final%20Opinion.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Court of Appeal Opinion
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">A PAGA representative action on behalf of thousands of California workers allegedly misclassified as independent contractors by Experis, a major staffing firm, and IBM. The case raised layered questions about PAGA standing, joint employer liability, and what it means to &#x201C;employ&#x201D; someone when a staffing agency and an end-user client share control of a worker. We briefed and argued the appeal in the California First Appellate District, which issued its opinion in July 2023.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Appellant%20Opening%20Brief%20As%20Filed%20v2.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Opening Brief
-        </a>
-        <a href="Cases/Final%20Opinion.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Court of Appeal Opinion
-        </a>
-      </div>
-    </div>
 
-    <div class="case-row" style="border-bottom:none;">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;margin-bottom:0.75rem;">
-        <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Nomorobo v. Harris &amp; Harris, Ltd.</h3>
-        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.D. Tex. &#xB7; 2025</span>
-        <span class="tag">TCPA &#xB7; Robocalls &#xB7; Novel Standing</span>
+      <div class="case-row" style="border-bottom:none;">
+        <button class="case-toggle">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:baseline;">
+            <h3 class="case-title serif" style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:500;color:var(--navy);letter-spacing:-0.02em;">Nomorobo v. Harris &amp; Harris, Ltd.</h3>
+            <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">N.D. Tex. &#xB7; 2025</span>
+            <span class="tag">TCPA &#xB7; Robocalls &#xB7; Novel Standing</span>
+          </div>
+          <svg class="case-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </button>
+        <div class="case-detail">
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;padding-top:0.5rem;">Nomorobo built a business around stopping robocalls: it maintains roughly 290,000 &#x201C;honeypot&#x201D; phone numbers that exist only to catch and identify automated dialers. Harris &amp; Harris, a debt collector, called those numbers more than 16,500 times using equipment that clearly violates the Telephone Consumer Protection Act &#x2014; costing Nomorobo up to $1 million a year. The novel question: does a company whose entire purpose is to receive and catalog illegal calls have standing to sue under the TCPA?</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+            <a href="Cases/Doc.%201%20Complaint%20and%20Exhibits.pdf" target="_blank" rel="noopener" class="doc-link">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
+              Complaint
+            </a>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.85;max-width:72ch;margin-bottom:1rem;">Nomorobo built a business around stopping robocalls: it maintains roughly 290,000 &#x201C;honeypot&#x201D; phone numbers that exist only to catch and identify automated dialers. Harris &amp; Harris, a debt collector, called those numbers more than 16,500 times using equipment that clearly violates the Telephone Consumer Protection Act — costing Nomorobo up to $1 million a year. The novel question: does a company whose entire purpose is to receive and catalog illegal calls have standing to sue under the TCPA?</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-        <a href="Cases/Doc.%201%20Complaint%20and%20Exhibits.pdf" target="_blank" rel="noopener" class="doc-link">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 9L9 1M9 1H4M9 1V6"/></svg>
-          Complaint
-        </a>
-      </div>
-    </div>
+    </div><!-- /section-body -->
   </div>
 
   <!-- ⑤ A Practice We're Building -->
@@ -337,7 +525,7 @@
       Fighting Discrimination Against People with Opioid Use Disorder
     </h2>
     <div style="padding:1.75rem 0 0 1.25rem;">
-      <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">Millions of Americans manage opioid use disorder with FDA-approved medications like buprenorphine and methadone. But people taking these medications are routinely turned away from jails, prisons, recovery homes, and other institutions — sometimes with devastating or even fatal consequences. We are building a practice dedicated to challenging these policies and vindicating the rights of people in recovery.</p>
+      <p style="font-size:0.925rem;color:var(--muted);line-height:1.85;max-width:72ch;">Millions of Americans manage opioid use disorder with FDA-approved medications like buprenorphine and methadone. But people taking these medications are routinely turned away from jails, prisons, recovery homes, and other institutions &#x2014; sometimes with devastating or even fatal consequences. We are building a practice dedicated to challenging these policies and vindicating the rights of people in recovery.</p>
     </div>
   </div>
 
@@ -348,7 +536,7 @@
 
   <!-- Disclaimer -->
   <div style="padding:1.75rem 2rem;background:var(--bg-warm);border:1px solid var(--border);">
-    <p style="font-size:0.82rem;color:var(--muted);line-height:1.8;font-style:italic;">This page lists a sample of our recent and current cases — it&#x2019;s not a complete picture of our docket. For more information about our work, feel free to reach out at <a href="mailto:hi@gerstein-harrow.com" style="color:var(--coral);text-decoration:underline;text-underline-offset:3px;">hi@gerstein-harrow.com</a>.</p>
+    <p style="font-size:0.82rem;color:var(--muted);line-height:1.8;font-style:italic;">This page lists a sample of our recent and current cases &#x2014; it&#x2019;s not a complete picture of our docket. For more information about our work, feel free to reach out at <a href="mailto:hi@gerstein-harrow.com" style="color:var(--coral);text-decoration:underline;text-underline-offset:3px;">hi@gerstein-harrow.com</a>.</p>
   </div>
 
 </main>
@@ -360,10 +548,31 @@
     <a href="index.html" style="text-decoration:none;display:flex;align-items:center;">
       <img src="Brand%20Assets/GersteinHarrowLLP_FinalLogo-01.png" alt="Gerstein Harrow LLP" style="height:18px;display:block;opacity:0.7;">
     </a>
-    <span style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">&copy; 2026 Gerstein Harrow LLP &nbsp;·&nbsp; Washington, D.C.</span>
-    <a href="index.html" style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--muted)'">← Back to Home</a>
+    <span style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">&copy; 2026 Gerstein Harrow LLP &nbsp;&#xB7;&nbsp; Washington, D.C.</span>
+    <a href="index.html" style="font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--muted)'">&#x2190; Back to Home</a>
   </div>
 </footer>
+
+<script>
+  // Section-level accordion
+  document.querySelectorAll('.section-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      var bodyId = btn.getAttribute('aria-controls');
+      var body = document.getElementById(bodyId);
+      if (body) body.classList.toggle('open', !expanded);
+    });
+  });
+
+  // Case-level accordion
+  document.querySelectorAll('.case-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var row = btn.closest('.case-row');
+      if (row) row.classList.toggle('open');
+    });
+  });
+</script>
 
 </body>
 </html>
