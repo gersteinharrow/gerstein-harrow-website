@@ -86,9 +86,6 @@
     /* Practice cards */
     .practice-card { background: var(--bg-card); border: 1px solid var(--border); transition: border-color 0.3s, box-shadow 0.3s; padding: 2.75rem; }
     .practice-card:hover { border-color: var(--coral); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-    .practice-grid { display: grid; grid-template-columns: 1fr; gap: 1.5px; background: var(--border); }
-    @media (min-width: 640px)  { .practice-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1200px) { .practice-grid { grid-template-columns: repeat(4, 1fr); } }
 
     /* Person cards */
     .person-card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
@@ -188,7 +185,7 @@
       </h1>
       <div class="h3 rule-coral" style="margin:2.5rem 0;"></div>
       <p class="h3" style="font-size:1.1rem;font-weight:400;line-height:1.75;color:var(--muted);max-width:52ch;">
-        Gerstein Harrow is a boutique litigation firm in Washington, D.C. We handle high-stakes, first-impression cases — the kind where the answer isn&#x2019;t in a casebook yet. We specialize in plaintiff-side crypto cases, AI accountability, civil rights, and complex issues and appeals.
+        Gerstein Harrow is a boutique litigation firm in Washington, D.C. We handle high-stakes, first-impression cases — the kind where the answer isn&#x2019;t in a casebook yet. We specialize in crypto and AI accountability, civil rights, and complex issues and appeals.
       </p>
       <div class="h4" style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.75rem;">
         <a href="#practice"  class="btn btn-coral">Our Work</a>
@@ -215,13 +212,13 @@
       </h2>
     </div>
 
-    <div class="stagger practice-grid">
+    <div class="stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5px;background:var(--border);">
       <div class="practice-card">
         <div class="serif" style="font-size:3.5rem;font-weight:400;color:var(--coral);opacity:0.3;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.04em;">01</div>
-        <h3 class="serif" style="font-size:1.5rem;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.2;">Crypto<br>Accountability</h3>
+        <h3 class="serif" style="font-size:1.5rem;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.2;">Tech<br>Accountability</h3>
         <div class="rule-coral" style="margin-bottom:1.25rem;"></div>
         <p style="font-size:0.875rem;color:var(--muted);line-height:1.75;">
-          We were among the first lawyers in the country to figure out how to hold crypto insiders accountable to their users. We&#x2019;ve sued Compound, PoolTogether, Ooki, and others — developing legal theories that have gotten real traction in courts.
+          We were among the first lawyers in the country to hold crypto insiders accountable to their users, suing Compound, PoolTogether, Ooki, and others. Now we&#x2019;re bringing the same approach to AI, with suits against OpenAI, Anthropic, Google, Meta, and SpaceX over AI systems that act autonomously to cause harm.
         </p>
       </div>
       <div class="practice-card">
@@ -238,14 +235,6 @@
         <div class="rule-coral" style="margin-bottom:1.25rem;"></div>
         <p style="font-size:0.875rem;color:var(--muted);line-height:1.75;">
           We love hard questions. We brief and argue complex cases from district courts through the U.S. Supreme Court, covering labor, employment, consumer protection, constitutional, and election law — often on issues where there isn&#x2019;t a clear answer yet.
-        </p>
-      </div>
-      <div class="practice-card">
-        <div class="serif" style="font-size:3.5rem;font-weight:400;color:var(--coral);opacity:0.3;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.04em;">04</div>
-        <h3 class="serif" style="font-size:1.5rem;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.2;">AI<br>Accountability</h3>
-        <div class="rule-coral" style="margin-bottom:1.25rem;"></div>
-        <p style="font-size:0.875rem;color:var(--muted);line-height:1.75;">
-          The companies building frontier AI admit they can&#x2019;t fully understand or control it. We use existing law to hold them responsible for the harm their systems cause &#x2014; including suits against OpenAI, Anthropic, Google, Meta, and SpaceX over AI agents that escaped containment and hacked third parties.
         </p>
       </div>
     </div>
@@ -334,7 +323,7 @@
         What we&#x2019;re working on
       </h2>
       <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:58ch;">
-        AI accountability, crypto accountability, terror-victim asset recovery, civil rights, and complex appeals — a sample of what we&#x2019;re litigating. Not a complete picture, just a representative look.
+        Tech accountability, terror-victim asset recovery, civil rights, and complex appeals — a sample of what we&#x2019;re litigating. Not a complete picture, just a representative look.
       </p>
     </div>
     <div style="flex-shrink:0;">
